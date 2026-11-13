@@ -10,112 +10,146 @@
 <meta property="og:image" content="https://julienl-it.github.io/bala-read/icon.png">
 <link rel="icon" href="icon.png">
 <link rel="apple-touch-icon" href="icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
+  /* Direction « Playful Soft UI » de l'app (famille Bala) : crème / aubergine, accent lilas, pastels. */
   :root {
-    --bg: #FBF6EF; --surface: #FFFFFF; --surface-2: #F1EAE0; --fg: #1D1A16; --muted: #857C71; --body: #4A443C;
-    --accent: #6A52E0; --accent-soft: #E6E1FF; --line: #E9E0D3; --on-accent: #FFFFFF; --green: #35635A;
-    --shadow: 0 10px 30px rgba(29, 26, 22, 0.08);
-    --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
-    --sans: -apple-system, "SF Pro Text", "Segoe UI", system-ui, sans-serif;
+    --bg: #FBF6EF; --surface: #FFFFFF; --chip: #F2EBE1; --ink: #221A2E; --ink2: #5F5570; --ink3: #8E85A0;
+    --accent: #6A52E0; --accent-solid: #7A63EE; --accent-soft: #E6E1FF;
+    --shadow: 0 10px 22px rgba(90, 64, 140, .09); --icobg: rgba(255, 255, 255, .7);
+    --mint: #17B7A2; --mint-soft: #D9F7F2; --mint-ink: #0B5C52;
+    --lilac: #7A63EE; --lilac-soft: #E6E1FF; --lilac-ink: #3D2E8A;
+    --butter: #F5AE1E; --butter-soft: #FFF0CE; --butter-ink: #6B4A00;
+    --peach: #FF7F51; --peach-soft: #FFE6DA; --peach-ink: #8A3313;
+    --blush: #F0648D; --blush-soft: #FFE1EA; --blush-ink: #8A2247;
+    --sky: #4FA8F0; --sky-soft: #DCEEFF; --sky-ink: #0F4F85;
+    --display: "Baloo 2", ui-rounded, "SF Pro Rounded", system-ui, sans-serif;
+    --body: "Nunito", ui-rounded, -apple-system, system-ui, sans-serif;
   }
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
-      --bg: #151221; --surface: #231E36; --surface-2: #241F1B; --fg: #EFE9E0; --muted: #9C9187; --body: #C8BFB4;
-      --accent: #A897FF; --accent-soft: #2F2858; --line: #2C2622; --on-accent: #1D1A16; --green: #4E8577;
-      --shadow: 0 10px 30px rgba(0, 0, 0, 0.35); color-scheme: dark;
+      --bg: #151221; --surface: #231E36; --chip: #2E2846; --ink: #F7F3FF; --ink2: #CFC7E0; --ink3: #9D94B3;
+      --accent: #A897FF; --accent-soft: #2F2858; --shadow: 0 10px 22px rgba(0, 0, 0, .40); --icobg: rgba(255, 255, 255, .08);
+      --mint-soft: #173A37; --mint-ink: #7DF0DC; --lilac-soft: #2F2858; --lilac-ink: #C0B4FF;
+      --butter-soft: #3D3218; --butter-ink: #FFE49A; --peach-soft: #40261C; --peach-ink: #FFC5A3;
+      --blush-soft: #40202C; --blush-ink: #FFB3C7; --sky-soft: #1B3048; --sky-ink: #A9DBFF;
+      color-scheme: dark;
     }
   }
   :root[data-theme="dark"] {
-    --bg: #151221; --surface: #231E36; --surface-2: #241F1B; --fg: #EFE9E0; --muted: #9C9187; --body: #C8BFB4;
-    --accent: #A897FF; --accent-soft: #2F2858; --line: #2C2622; --on-accent: #1D1A16; --green: #4E8577;
-    --shadow: 0 10px 30px rgba(0, 0, 0, 0.35); color-scheme: dark;
+    --bg: #151221; --surface: #231E36; --chip: #2E2846; --ink: #F7F3FF; --ink2: #CFC7E0; --ink3: #9D94B3;
+    --accent: #A897FF; --accent-soft: #2F2858; --shadow: 0 10px 22px rgba(0, 0, 0, .40); --icobg: rgba(255, 255, 255, .08);
+    --mint-soft: #173A37; --mint-ink: #7DF0DC; --lilac-soft: #2F2858; --lilac-ink: #C0B4FF;
+    --butter-soft: #3D3218; --butter-ink: #FFE49A; --peach-soft: #40261C; --peach-ink: #FFC5A3;
+    --blush-soft: #40202C; --blush-ink: #FFB3C7; --sky-soft: #1B3048; --sky-ink: #A9DBFF;
+    color-scheme: dark;
   }
   * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; scroll-padding-top: 76px; }
-  body { margin: 0; background: var(--bg); color: var(--fg); font-family: var(--sans); font-size: 17px; line-height: 1.6; }
+  html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--body); font-size: 17px; line-height: 1.6; }
   img { max-width: 100%; height: auto; display: block; }
-  a { color: var(--accent); }
-  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
-  h1, h2, h3 { font-family: var(--serif); line-height: 1.15; margin: 0; text-wrap: balance; }
+  a { color: var(--accent); font-weight: 700; }
+  a:focus-visible { outline: 3px solid var(--accent-solid); outline-offset: 3px; border-radius: 8px; }
+  h1, h2, h3 { font-family: var(--display); font-weight: 800; line-height: 1.1; margin: 0; text-wrap: balance; }
   p { margin: 0; }
   .wrap { width: min(1080px, 100% - 32px); margin-inline: auto; }
   section.block { padding: 64px 0; }
-  .eyebrow { display: inline-block; font-size: .78rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
-             color: var(--accent); background: var(--accent-soft); padding: 4px 12px; border-radius: 999px; margin-bottom: 14px; }
-  .section-title { font-size: clamp(1.7rem, 4vw, 2.4rem); margin-bottom: 12px; }
-  .lead { color: var(--muted); font-size: 1.08rem; max-width: 640px; }
 
-  .topbar { position: sticky; top: 0; z-index: 10; backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
-            background: color-mix(in srgb, var(--bg) 82%, transparent); border-bottom: 1px solid var(--line); }
-  .topbar .wrap { display: flex; align-items: center; gap: 16px; height: 60px; }
-  .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--fg); font-family: var(--serif); font-weight: 700; font-size: 1.1rem; }
-  .brand img { width: 32px; height: 32px; border-radius: 8px; }
-  .topbar nav { margin-left: auto; display: flex; gap: 22px; }
-  .topbar nav a { color: var(--muted); text-decoration: none; font-weight: 600; font-size: .95rem; }
-  .topbar nav a:hover { color: var(--fg); }
-  @media (max-width: 640px) { .topbar nav { gap: 14px; } .topbar nav a.opt { display: none; } }
+  .eyebrow { display: inline-block; font-size: .78rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase;
+             color: var(--lilac-ink); background: var(--accent-soft); padding: 5px 13px; border-radius: 999px; margin-bottom: 14px; }
+  .section-title { font-size: clamp(2rem, 4.5vw, 2.7rem); margin-bottom: 10px; }
+  .lead { color: var(--ink2); font-size: 1.08rem; max-width: 640px; }
+  .card { background: var(--surface); border-radius: 26px; box-shadow: var(--shadow); }
 
-  .hero { padding: 64px 0 24px; }
+  /* Barre du haut flottante, comme la barre d'onglets de l'app */
+  .topbar { position: sticky; top: 12px; z-index: 10; }
+  .topbar .bar { display: flex; align-items: center; gap: 16px; height: 62px; padding: 0 10px 0 14px;
+                 background: color-mix(in srgb, var(--surface) 88%, transparent); backdrop-filter: blur(14px);
+                 -webkit-backdrop-filter: blur(14px); border-radius: 22px; box-shadow: var(--shadow); }
+  .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ink); font-family: var(--display); font-weight: 800; font-size: 1.25rem; }
+  .brand img { width: 36px; height: 36px; border-radius: 10px; }
+  .topbar nav { margin-left: auto; display: flex; gap: 4px; }
+  .topbar nav a { color: var(--ink3); text-decoration: none; font-weight: 800; font-size: .92rem; padding: 8px 14px; border-radius: 14px; }
+  .topbar nav a:hover { color: var(--ink); background: var(--chip); }
+  .topbar nav a.on { color: #fff; background: var(--accent-solid); }
+  @media (max-width: 640px) { .topbar nav a.opt { display: none; } .topbar nav a { padding: 8px 10px; } }
+
+  .btn { display: inline-flex; align-items: center; gap: 8px; text-decoration: none; font-weight: 800; border-radius: 20px;
+         padding: 14px 24px; background: var(--accent-solid); color: #fff; box-shadow: 0 10px 22px rgba(122, 99, 238, .35); }
+  .btn.ghost { background: var(--surface); color: var(--accent); box-shadow: var(--shadow); }
+
+  /* Héros sur dégradé pastel, comme les captures App Store */
+  .hero { background: linear-gradient(180deg, var(--lilac-soft) 0%, var(--bg) 85%); margin-top: -74px; padding: 130px 0 24px; }
   .hero .wrap { display: grid; grid-template-columns: 1.05fr .95fr; gap: 40px; align-items: center; }
   .hero .app { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; }
-  .hero .app img { width: 64px; height: 64px; border-radius: 16px; box-shadow: var(--shadow); }
-  .hero .app span { color: var(--muted); font-weight: 600; }
-  .hero h1 { font-size: clamp(2.3rem, 6vw, 3.6rem); margin-bottom: 18px; }
-  .hero p.tag { font-size: 1.15rem; color: var(--body); max-width: 520px; margin-bottom: 26px; }
-  .btn { display: inline-flex; align-items: center; gap: 8px; text-decoration: none; font-weight: 700; border-radius: 999px;
-         padding: 12px 22px; background: var(--accent); color: var(--on-accent); }
-  .btn.ghost { background: transparent; color: var(--accent); border: 1.5px solid var(--accent); }
+  .hero .app img { width: 68px; height: 68px; border-radius: 18px; box-shadow: var(--shadow); }
+  .hero .app span { font-weight: 800; color: var(--lilac-ink); background: var(--surface); padding: 6px 14px; border-radius: 999px; box-shadow: var(--shadow); font-size: .9rem; }
+  .hero h1 { font-size: clamp(2.5rem, 6.5vw, 3.9rem); margin-bottom: 16px; }
+  .hero p.tag { font-size: 1.15rem; color: var(--ink2); max-width: 520px; margin-bottom: 26px; }
   .ctas { display: flex; flex-wrap: wrap; gap: 12px; }
-  .phones { display: flex; gap: 16px; justify-content: center; }
-  .phones img { width: 46%; border-radius: 28px; box-shadow: var(--shadow); border: 1px solid var(--line); }
-  .phones img:last-child { margin-top: 48px; }
+  .phones { display: flex; gap: 18px; justify-content: center; }
+  .phone { width: 46%; padding: 9px; background: #181422; border-radius: 40px; box-shadow: 0 24px 48px rgba(90, 64, 140, .25); }
+  .phone img { border-radius: 32px; }
+  .phones .phone:last-child { margin-top: 56px; }
   @media (max-width: 820px) { .hero .wrap { grid-template-columns: 1fr; } }
 
-  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 32px; }
+  /* Tuiles pastel (comme « Envie de lire quoi ? » dans l'app) */
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 30px; }
   @media (max-width: 860px) { .grid { grid-template-columns: 1fr 1fr; } }
   @media (max-width: 560px) { .grid { grid-template-columns: 1fr; } }
-  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 22px; box-shadow: var(--shadow); }
-  .card h3 { font-size: 1.2rem; margin-bottom: 8px; }
-  .card p { color: var(--body); font-size: .97rem; }
-  .ico { width: 42px; height: 42px; border-radius: 12px; display: grid; place-items: center; background: var(--accent-soft); color: var(--accent); margin-bottom: 14px; font-size: 1.3rem; }
+  .tile { border-radius: 24px; padding: 22px; }
+  .tile h3 { font-size: 1.3rem; margin: 12px 0 6px; }
+  .tile p { font-size: .97rem; }
+  .ico { width: 46px; height: 46px; flex: none; border-radius: 14px; display: grid; place-items: center; background: var(--icobg); }
+  .ico i { width: 24px; height: 24px; display: block; -webkit-mask: var(--src) center / contain no-repeat; mask: var(--src) center / contain no-repeat; background: currentColor; }
+  .t-mint { background: var(--mint-soft); color: var(--mint-ink); } .t-mint .ico, .ico.t-mint { color: var(--mint); }
+  .t-lilac { background: var(--lilac-soft); color: var(--lilac-ink); } .t-lilac .ico, .ico.t-lilac { color: var(--lilac); }
+  .t-butter { background: var(--butter-soft); color: var(--butter-ink); } .t-butter .ico, .ico.t-butter { color: var(--butter); }
+  .t-peach { background: var(--peach-soft); color: var(--peach-ink); } .t-peach .ico, .ico.t-peach { color: var(--peach); }
+  .t-blush { background: var(--blush-soft); color: var(--blush-ink); } .t-blush .ico, .ico.t-blush { color: var(--blush); }
+  .t-sky { background: var(--sky-soft); color: var(--sky-ink); } .t-sky .ico, .ico.t-sky { color: var(--sky); }
 
-  .shots { display: flex; gap: 16px; overflow-x: auto; padding: 8px 2px 18px; margin-top: 28px; scroll-snap-type: x mandatory; }
-  .shots img { width: 240px; flex: none; border-radius: 24px; border: 1px solid var(--line); box-shadow: var(--shadow); scroll-snap-align: start; }
+  .shots { display: flex; gap: 18px; overflow-x: auto; padding: 14px 4px 24px; margin-top: 26px; scroll-snap-type: x mandatory; }
+  .shots .phone { width: 240px; flex: none; scroll-snap-align: start; }
 
-  .faq { margin-top: 28px; display: grid; gap: 12px; }
-  details { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 4px 18px; }
-  summary { cursor: pointer; font-weight: 700; padding: 14px 0; list-style: none; }
+  .faq { margin-top: 26px; display: grid; gap: 12px; }
+  details { background: var(--surface); border-radius: 22px; padding: 4px 20px; box-shadow: var(--shadow); }
+  summary { cursor: pointer; font-weight: 800; padding: 16px 0; list-style: none; display: flex; justify-content: space-between; gap: 12px; }
   summary::-webkit-details-marker { display: none; }
-  summary::after { content: "+"; float: right; color: var(--accent); font-weight: 700; }
+  summary::after { content: "+"; flex: none; color: #fff; background: var(--accent-solid); width: 26px; height: 26px; border-radius: 9px; text-align: center; line-height: 26px; font-weight: 800; }
   details[open] summary::after { content: "–"; }
-  details > div { padding: 0 0 16px; color: var(--body); }
+  details > div { padding: 0 0 18px; color: var(--ink2); }
   details ul { margin: 8px 0 0; padding-left: 20px; }
-  code { background: var(--surface-2); padding: 1px 6px; border-radius: 6px; font-size: .92em; }
+  code { background: var(--chip); padding: 2px 7px; border-radius: 8px; font-size: .92em; }
 
-  .contact { margin-top: 24px; background: var(--accent-soft); border-radius: 16px; padding: 16px 20px; }
-  .contact strong { color: var(--accent); font-family: var(--serif); font-size: 1.1rem; display: block; margin-bottom: 4px; }
+  .contact { margin-top: 22px; border-radius: 24px; padding: 18px 22px; display: flex; gap: 14px; align-items: center; }
+  .contact strong { font-family: var(--display); font-size: 1.2rem; display: block; }
 
-  .legal { background: var(--surface); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-  .legal .doc { max-width: 760px; }
-  .legal h3 { font-size: 1.25rem; margin: 28px 0 8px; }
-  .legal p, .legal li { color: var(--body); }
+  .legal .doc { max-width: 780px; padding: 34px clamp(20px, 4vw, 44px); margin-top: 22px; }
+  .legal h3 { font-size: 1.35rem; margin: 30px 0 8px; display: flex; align-items: center; gap: 12px; }
+  .legal h3 .ico { width: 38px; height: 38px; border-radius: 12px; background: var(--chip); }
+  .legal h3 .ico i { width: 20px; height: 20px; }
+  .legal p, .legal li { color: var(--ink2); }
   .legal ul { padding-left: 22px; }
-  .legal .updated { color: var(--muted); font-size: .92rem; margin-top: 6px; }
-  .summary-box { margin-top: 22px; border-left: 4px solid var(--green); background: var(--surface-2); padding: 14px 18px; border-radius: 0 12px 12px 0; }
+  .legal .updated { color: var(--ink3); font-size: .92rem; font-weight: 700; }
+  .summary-box { margin-top: 18px; border-radius: 22px; padding: 18px 20px; }
+  .summary-box strong { font-family: var(--display); font-size: 1.2rem; }
 
-  footer { padding: 36px 0 48px; color: var(--muted); font-size: .9rem; }
+  footer { padding: 36px 0 52px; color: var(--ink3); font-size: .9rem; font-weight: 700; }
   footer .wrap { display: flex; flex-wrap: wrap; gap: 12px 24px; justify-content: space-between; }
 </style>
 </head>
 <body>
 
 <header class="topbar">
-  <div class="wrap">
+  <div class="wrap bar">
     <a class="brand" href="#"><img src="icon.png" alt="">Bala Read</a>
     <nav>
       <a class="opt" href="#fonctions">Fonctions</a>
       <a href="#assistance">Assistance</a>
-      <a href="#confidentialite">Confidentialité</a>
+      <a class="on" href="#confidentialite">Confidentialité</a>
     </nav>
   </div>
 </header>
@@ -124,7 +158,7 @@
   <section class="hero">
     <div class="wrap">
       <div>
-        <div class="app"><img src="icon.png" alt="Icône de Bala Read"><span>iPhone et iPad</span></div>
+        <div class="app"><img src="icon.png" alt="Icône de Bala Read"><span>iPhone et iPad · Gratuit</span></div>
         <h1>Votre bibliothèque Calibre, dans votre poche.</h1>
         <p class="tag">Bala Read se connecte à votre serveur Calibre-Web pour lire vos livres, BD et PDF, même hors ligne. Rien ne transite par nous.</p>
         <div class="ctas">
@@ -133,8 +167,8 @@
         </div>
       </div>
       <div class="phones">
-        <img src="img/01-accueil.jpg" alt="Écran d'accueil : lectures en cours et ajouts récents">
-        <img src="img/04-lecteur.jpg" alt="Le lecteur en thème sépia">
+        <div class="phone"><img src="img/01-accueil.jpg" alt="Accueil : reprendre la lecture, livres en cours et ajouts récents"></div>
+        <div class="phone"><img src="img/04-lecteur.jpg" alt="Le lecteur en thème sépia"></div>
       </div>
     </div>
   </section>
@@ -143,20 +177,20 @@
     <div class="wrap">
       <span class="eyebrow">Fonctions</span>
       <h2 class="section-title">Pensé pour la lecture longue</h2>
-      <p class="lead">Une app calme et rapide, qui respecte votre bibliothèque et vos habitudes.</p>
+      <p class="lead">Une app douce et rapide, qui respecte votre bibliothèque et vos habitudes.</p>
       <div class="grid">
-        <div class="card"><div class="ico">📚</div><h3>Bibliothèque instantanée</h3><p>Votre catalogue s'affiche immédiatement, même sans réseau. Les nouveautés arrivent en arrière-plan. Tri par série, étiquettes et état de lecture.</p></div>
-        <div class="card"><div class="ico">⬇︎</div><h3>Lecture hors ligne</h3><p>Les livres que vous ouvrez sont gardés sur l'appareil. Les téléchargements continuent même app fermée, avec leur progression.</p></div>
-        <div class="card"><div class="ico">📖</div><h3>EPUB, PDF et BD</h3><p>Un lecteur moderne pour EPUB, PDF et BD au format CBZ : pages ou défilement, thèmes clair, sépia et sombre, police, marges, sens manga.</p></div>
-        <div class="card"><div class="ico">%</div><h3>Progression partout</h3><p>Pourcentage de lecture sur chaque couverture, reprise exacte de votre page, synchronisée entre vos appareils via votre iCloud.</p></div>
-        <div class="card"><div class="ico">🔖</div><h3>Marque-pages et sommaire</h3><p>Ajoutez des marque-pages, parcourez le sommaire ou les vignettes d'un PDF, sautez n'importe où avec le curseur.</p></div>
-        <div class="card"><div class="ico">🔒</div><h3>Votre serveur, vos données</h3><p>L'app ne parle qu'à votre serveur Calibre-Web. Aucun compte, aucune publicité, aucune statistique d'utilisation.</p></div>
+        <div class="tile t-lilac"><div class="ico"><i style="--src:url(img/icons/books.png)"></i></div><h3>Bibliothèque instantanée</h3><p>Votre catalogue s'affiche immédiatement, même sans réseau. Les nouveautés arrivent en arrière-plan. Séries, étiquettes et état de lecture.</p></div>
+        <div class="tile t-mint"><div class="ico"><i style="--src:url(img/icons/download.png)"></i></div><h3>Lecture hors ligne</h3><p>Les livres que vous ouvrez restent sur l'appareil. Les téléchargements continuent même app fermée, avec leur progression.</p></div>
+        <div class="tile t-butter"><div class="ico"><i style="--src:url(img/icons/read.png)"></i></div><h3>EPUB, PDF et BD</h3><p>Un lecteur moderne : pages ou défilement, thèmes clair, sépia et sombre, police, marges, sens de lecture manga.</p></div>
+        <div class="tile t-peach"><div class="ico"><i style="--src:url(img/icons/cloud.png)"></i></div><h3>Progression partout</h3><p>Pourcentage de lecture sur chaque couverture et reprise exacte de votre page, synchronisés via votre iCloud.</p></div>
+        <div class="tile t-blush"><div class="ico"><i style="--src:url(img/icons/bookmark.png)"></i></div><h3>Marque-pages et sommaire</h3><p>Ajoutez des marque-pages, parcourez le sommaire ou les vignettes d'un PDF, sautez n'importe où avec le curseur.</p></div>
+        <div class="tile t-sky"><div class="ico"><i style="--src:url(img/icons/shield-check.png)"></i></div><h3>Votre serveur, vos données</h3><p>L'app ne parle qu'à votre serveur Calibre-Web. Aucun compte, aucune publicité, aucune statistique d'utilisation.</p></div>
       </div>
       <div class="shots" aria-label="Captures d'écran">
-        <img src="img/01-accueil.jpg" alt="Accueil">
-        <img src="img/02-bibliotheque.jpg" alt="Bibliothèque">
-        <img src="img/04-lecteur.jpg" alt="Lecteur EPUB">
-        <img src="img/05-bd.jpg" alt="Lecture d'une BD">
+        <div class="phone"><img src="img/01-accueil.jpg" alt="Accueil"></div>
+        <div class="phone"><img src="img/02-bibliotheque.jpg" alt="Bibliothèque"></div>
+        <div class="phone"><img src="img/04-lecteur.jpg" alt="Lecteur EPUB"></div>
+        <div class="phone"><img src="img/05-bd.jpg" alt="Lecture d'une BD"></div>
       </div>
     </div>
   </section>
@@ -165,7 +199,7 @@
     <div class="wrap">
       <span class="eyebrow">Assistance</span>
       <h2 class="section-title">Besoin d'aide ?</h2>
-      <p class="lead">Bala Read fonctionne avec votre propre serveur <a href="https://github.com/janeczku/calibre-web">Calibre-Web</a> (logiciel libre, auto-hébergé), via son flux OPDS.</p>
+      <p class="lead">Bala Read fonctionne avec votre propre serveur <a href="https://github.com/janeczku/calibre-web">Calibre-Web</a> (logiciel libre, auto-hébergé), via son catalogue OPDS.</p>
       <div class="faq">
         <details open>
           <summary>Comment connecter ma bibliothèque ?</summary>
@@ -173,13 +207,17 @@
             <ul>
               <li>Saisissez l'adresse de votre serveur Calibre-Web, par exemple <code>https://livres.mondomaine.fr</code> ou <code>http://192.168.1.20:8083</code>.</li>
               <li>Utilisez votre identifiant et votre mot de passe Calibre-Web.</li>
-              <li>Le flux OPDS doit être activé (Calibre-Web › Administration › Configuration › « Activer le catalogue OPDS »).</li>
+              <li>Le catalogue OPDS doit être activé (Calibre-Web › Administration › Configuration › « Activer le catalogue OPDS »).</li>
             </ul>
           </div>
         </details>
         <details>
           <summary>Je n'ai pas de serveur, puis-je essayer l'app ?</summary>
-          <div>Oui : sur l'écran d'accueil, touchez « Essayer avec la bibliothèque de démo ». Quelques livres, une BD et un guide PDF créés pour l'app vous permettent de découvrir toutes les fonctions.</div>
+          <div>Oui : sur l'écran d'accueil, touchez « Essayer avec la bibliothèque de démo ». Des romans, une BD et un guide PDF créés pour l'app vous permettent de découvrir toutes les fonctions.</div>
+        </details>
+        <details>
+          <summary>Comment prendre l'app en main ?</summary>
+          <div>Un guide de quatre pages s'affiche au premier lancement. Vous pouvez le revoir à tout moment dans Réglages › Guide de prise en main.</div>
         </details>
         <details>
           <summary>Quels formats sont pris en charge ?</summary>
@@ -187,7 +225,7 @@
         </details>
         <details>
           <summary>La bibliothèque ne se met pas à jour</summary>
-          <div>Tirez la liste vers le bas pour forcer une synchronisation complète, ou utilisez Réglages › Synchroniser la bibliothèque. Les séries sont analysées en arrière-plan lorsque de nouveaux livres apparaissent.</div>
+          <div>Tirez la liste vers le bas pour forcer une synchronisation complète, ou utilisez Réglages › Synchroniser la bibliothèque. Les séries sont analysées discrètement en arrière-plan lorsque de nouveaux livres apparaissent.</div>
         </details>
         <details>
           <summary>Ma progression ne se synchronise pas entre mes appareils</summary>
@@ -198,62 +236,66 @@
           <div>Onglet Téléchargés : balayez un livre pour le supprimer de l'appareil, ou utilisez le menu ⋯ › « Tout supprimer de l'appareil ». Vos livres restent sur votre serveur et votre progression est conservée.</div>
         </details>
       </div>
-      <div class="contact">
-        <strong>Contacter le développeur</strong>
-        Ouvrez une demande sur <a href="https://github.com/julienL-IT/bala-read/issues">GitHub</a>, ou depuis l'App Store : page de l'app › « Assistance de l'app ».
+      <div class="contact t-lilac">
+        <div class="ico"><i style="--src:url(img/icons/search.png)"></i></div>
+        <div><strong>Contacter le développeur</strong>Ouvrez une demande sur <a href="https://github.com/julienL-IT/bala-read/issues">GitHub</a>, ou depuis l'App Store : page de l'app › « Assistance de l'app ».</div>
       </div>
     </div>
   </section>
 
   <section class="block legal" id="confidentialite">
-    <div class="wrap doc">
+    <div class="wrap">
       <span class="eyebrow">Confidentialité</span>
       <h2 class="section-title">Politique de confidentialité</h2>
-      <p class="updated">Dernière mise à jour : 13 novembre 2026</p>
+      <div class="card doc">
+        <p class="updated">Dernière mise à jour : 14 novembre 2026</p>
 
-      <div class="summary-box">
-        <strong>En bref :</strong> Bala Read ne collecte aucune donnée personnelle. Le développeur n'a accès ni à votre bibliothèque, ni à vos identifiants, ni à vos lectures. L'app communique uniquement avec le serveur que vous indiquez et avec votre propre compte iCloud.
+        <div class="summary-box t-mint">
+          <strong>En bref</strong><br>
+          Bala Read ne collecte aucune donnée personnelle. Le développeur n'a accès ni à votre bibliothèque, ni à vos identifiants, ni à vos lectures. L'app communique uniquement avec le serveur que vous indiquez et avec votre propre compte iCloud.
+        </div>
+
+        <h3><span class="ico t-lilac"><i style="--src:url(img/icons/shield-check.png)"></i></span>Données que vous saisissez</h3>
+        <p>L'adresse de votre serveur Calibre-Web, votre identifiant et votre mot de passe sont enregistrés uniquement sur votre appareil, dans le trousseau sécurisé d'iOS (Keychain). Ils servent exclusivement à se connecter à votre serveur.</p>
+
+        <h3><span class="ico t-butter"><i style="--src:url(img/icons/books.png)"></i></span>Données stockées sur l'appareil</h3>
+        <ul>
+          <li>Le catalogue de votre bibliothèque (titres, auteurs, séries, couvertures), pour un affichage instantané et hors ligne.</li>
+          <li>Les livres que vous téléchargez pour les lire hors ligne.</li>
+          <li>Vos réglages de lecture et l'état du guide de prise en main.</li>
+          <li>Si vous l'utilisez, la bibliothèque de démonstration, entièrement intégrée à l'app.</li>
+        </ul>
+        <p>Ces données restent sur votre appareil et sont supprimées avec l'app, ou via Réglages › « Se déconnecter de tout ».</p>
+
+        <h3><span class="ico t-sky"><i style="--src:url(img/icons/cloud.png)"></i></span>Synchronisation iCloud</h3>
+        <p>Votre progression de lecture, vos marque-pages, vos favoris et vos collections sont synchronisés entre vos appareils grâce au stockage iCloud d'Apple (iCloud Key-Value Storage), rattaché à votre compte iCloud. Le développeur n'y a pas accès. Cette synchronisation est soumise à la politique de confidentialité d'Apple.</p>
+
+        <h3><span class="ico t-peach"><i style="--src:url(img/icons/refresh.png)"></i></span>Communications réseau</h3>
+        <p>L'app se connecte uniquement au serveur Calibre-Web que vous avez configuré, pour récupérer le catalogue, les couvertures et les livres. Aucune autre connexion n'est établie vers des serveurs tiers.</p>
+
+        <h3><span class="ico t-blush"><i style="--src:url(img/icons/heart.png)"></i></span>Ce que l'app ne fait pas</h3>
+        <ul>
+          <li>Aucun compte à créer, aucune publicité.</li>
+          <li>Aucun outil de statistiques, de suivi publicitaire ou de mesure d'audience.</li>
+          <li>Aucune donnée vendue ou partagée avec des tiers.</li>
+        </ul>
+
+        <h3><span class="ico t-mint"><i style="--src:url(img/icons/shield-check.png)"></i></span>Enfants</h3>
+        <p>L'app ne collecte aucune donnée, y compris auprès des enfants.</p>
+
+        <h3><span class="ico t-lilac"><i style="--src:url(img/icons/download.png)"></i></span>Vos droits</h3>
+        <p>Toutes les données étant stockées sur votre appareil, sur votre serveur ou dans votre iCloud, vous en gardez le contrôle total : supprimer l'app efface les données locales ; les données iCloud se gèrent dans les réglages iCloud de votre appareil.</p>
+
+        <h3><span class="ico t-butter"><i style="--src:url(img/icons/search.png)"></i></span>Contact</h3>
+        <p>Pour toute question sur cette politique : <a href="https://github.com/julienL-IT/bala-read/issues">GitHub</a> ou la page App Store de l'app › « Assistance de l'app ».</p>
       </div>
-
-      <h3>Données que vous saisissez</h3>
-      <p>L'adresse de votre serveur Calibre-Web, votre identifiant et votre mot de passe sont enregistrés uniquement sur votre appareil, dans le trousseau sécurisé d'iOS (Keychain). Ils servent exclusivement à se connecter à votre serveur.</p>
-
-      <h3>Données stockées sur l'appareil</h3>
-      <ul>
-        <li>Le catalogue de votre bibliothèque (titres, auteurs, séries, couvertures), pour un affichage instantané et hors ligne.</li>
-        <li>Les livres que vous téléchargez pour les lire hors ligne.</li>
-        <li>Vos réglages de lecture.</li>
-      </ul>
-      <p>Ces données restent sur votre appareil et sont supprimées avec l'app, ou via Réglages › « Se déconnecter de tout ».</p>
-
-      <h3>Synchronisation iCloud</h3>
-      <p>Votre progression de lecture, vos marque-pages, vos favoris et vos collections sont synchronisés entre vos appareils grâce au stockage iCloud d'Apple (iCloud Key-Value Storage), rattaché à votre compte iCloud. Le développeur n'y a pas accès. Cette synchronisation est soumise à la politique de confidentialité d'Apple.</p>
-
-      <h3>Communications réseau</h3>
-      <p>L'app se connecte uniquement au serveur Calibre-Web que vous avez configuré, pour récupérer le catalogue, les couvertures et les livres. Aucune autre connexion n'est établie vers des serveurs tiers.</p>
-
-      <h3>Ce que l'app ne fait pas</h3>
-      <ul>
-        <li>Aucun compte à créer, aucune publicité.</li>
-        <li>Aucun outil de statistiques, de suivi publicitaire ou de mesure d'audience.</li>
-        <li>Aucune donnée vendue ou partagée avec des tiers.</li>
-      </ul>
-
-      <h3>Enfants</h3>
-      <p>L'app ne collecte aucune donnée, y compris auprès des enfants.</p>
-
-      <h3>Vos droits</h3>
-      <p>Toutes les données étant stockées sur votre appareil, sur votre serveur ou dans votre iCloud, vous en gardez le contrôle total : supprimer l'app efface les données locales ; les données iCloud se gèrent dans les réglages iCloud de votre appareil.</p>
-
-      <h3>Contact</h3>
-      <p>Pour toute question sur cette politique : <a href="https://github.com/julienL-IT/bala-read/issues">GitHub</a> ou la page App Store de l'app › « Assistance de l'app ».</p>
     </div>
   </section>
 </main>
 
 <footer>
   <div class="wrap">
-    <span>© 2026 Bala Read</span>
+    <span>© 2026 Bala Read · de la famille Bala</span>
     <span>Calibre et Calibre-Web sont des logiciels libres indépendants de cette app.</span>
   </div>
 </footer>
