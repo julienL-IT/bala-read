@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Bala Read · Lisez votre bibliothèque Calibre</title>
+<meta name="description" content="Bala Read, l'app iPhone et iPad pour lire les livres, BD et PDF de votre serveur Calibre-Web, même hors ligne. Assistance et politique de confidentialité.">
+<meta property="og:title" content="Bala Read · Lisez votre bibliothèque Calibre">
+<meta property="og:description" content="Lisez les livres, BD et PDF de votre serveur Calibre-Web sur iPhone et iPad, même hors ligne.">
+<meta property="og:image" content="https://julienl-it.github.io/bala-read/icon.png">
+<link rel="icon" href="icon.png">
+<link rel="apple-touch-icon" href="icon.png">
+<style>
+  :root {
+    --bg: #FBF7F1; --surface: #FFFFFF; --surface-2: #F1EAE0; --fg: #1D1A16; --muted: #857C71; --body: #4A443C;
+    --accent: #B4552F; --accent-soft: #F3E1D7; --line: #E9E0D3; --on-accent: #FFFFFF; --green: #35635A;
+    --shadow: 0 10px 30px rgba(29, 26, 22, 0.08);
+    --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+    --sans: -apple-system, "SF Pro Text", "Segoe UI", system-ui, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #12100E; --surface: #1B1815; --surface-2: #241F1B; --fg: #EFE9E0; --muted: #9C9187; --body: #C8BFB4;
+      --accent: #E08055; --accent-soft: #3A2419; --line: #2C2622; --on-accent: #1D1A16; --green: #4E8577;
+      --shadow: 0 10px 30px rgba(0, 0, 0, 0.35); color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #12100E; --surface: #1B1815; --surface-2: #241F1B; --fg: #EFE9E0; --muted: #9C9187; --body: #C8BFB4;
+    --accent: #E08055; --accent-soft: #3A2419; --line: #2C2622; --on-accent: #1D1A16; --green: #4E8577;
+    --shadow: 0 10px 30px rgba(0, 0, 0, 0.35); color-scheme: dark;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: 76px; }
+  body { margin: 0; background: var(--bg); color: var(--fg); font-family: var(--sans); font-size: 17px; line-height: 1.6; }
+  img { max-width: 100%; height: auto; display: block; }
+  a { color: var(--accent); }
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
+  h1, h2, h3 { font-family: var(--serif); line-height: 1.15; margin: 0; text-wrap: balance; }
+  p { margin: 0; }
+  .wrap { width: min(1080px, 100% - 32px); margin-inline: auto; }
+  section.block { padding: 64px 0; }
+  .eyebrow { display: inline-block; font-size: .78rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+             color: var(--accent); background: var(--accent-soft); padding: 4px 12px; border-radius: 999px; margin-bottom: 14px; }
+  .section-title { font-size: clamp(1.7rem, 4vw, 2.4rem); margin-bottom: 12px; }
+  .lead { color: var(--muted); font-size: 1.08rem; max-width: 640px; }
+
+  .topbar { position: sticky; top: 0; z-index: 10; backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+            background: color-mix(in srgb, var(--bg) 82%, transparent); border-bottom: 1px solid var(--line); }
+  .topbar .wrap { display: flex; align-items: center; gap: 16px; height: 60px; }
+  .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--fg); font-family: var(--serif); font-weight: 700; font-size: 1.1rem; }
+  .brand img { width: 32px; height: 32px; border-radius: 8px; }
+  .topbar nav { margin-left: auto; display: flex; gap: 22px; }
+  .topbar nav a { color: var(--muted); text-decoration: none; font-weight: 600; font-size: .95rem; }
+  .topbar nav a:hover { color: var(--fg); }
+  @media (max-width: 640px) { .topbar nav { gap: 14px; } .topbar nav a.opt { display: none; } }
+
+  .hero { padding: 64px 0 24px; }
+  .hero .wrap { display: grid; grid-template-columns: 1.05fr .95fr; gap: 40px; align-items: center; }
+  .hero .app { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; }
+  .hero .app img { width: 64px; height: 64px; border-radius: 16px; box-shadow: var(--shadow); }
+  .hero .app span { color: var(--muted); font-weight: 600; }
+  .hero h1 { font-size: clamp(2.3rem, 6vw, 3.6rem); margin-bottom: 18px; }
+  .hero p.tag { font-size: 1.15rem; color: var(--body); max-width: 520px; margin-bottom: 26px; }
+  .btn { display: inline-flex; align-items: center; gap: 8px; text-decoration: none; font-weight: 700; border-radius: 999px;
+         padding: 12px 22px; background: var(--accent); color: var(--on-accent); }
+  .btn.ghost { background: transparent; color: var(--accent); border: 1.5px solid var(--accent); }
+  .ctas { display: flex; flex-wrap: wrap; gap: 12px; }
+  .phones { display: flex; gap: 16px; justify-content: center; }
+  .phones img { width: 46%; border-radius: 28px; box-shadow: var(--shadow); border: 1px solid var(--line); }
+  .phones img:last-child { margin-top: 48px; }
+  @media (max-width: 820px) { .hero .wrap { grid-template-columns: 1fr; } }
+
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 32px; }
+  @media (max-width: 860px) { .grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 560px) { .grid { grid-template-columns: 1fr; } }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 22px; box-shadow: var(--shadow); }
+  .card h3 { font-size: 1.2rem; margin-bottom: 8px; }
+  .card p { color: var(--body); font-size: .97rem; }
+  .ico { width: 42px; height: 42px; border-radius: 12px; display: grid; place-items: center; background: var(--accent-soft); color: var(--accent); margin-bottom: 14px; font-size: 1.3rem; }
+
+  .shots { display: flex; gap: 16px; overflow-x: auto; padding: 8px 2px 18px; margin-top: 28px; scroll-snap-type: x mandatory; }
+  .shots img { width: 240px; flex: none; border-radius: 24px; border: 1px solid var(--line); box-shadow: var(--shadow); scroll-snap-align: start; }
+
+  .faq { margin-top: 28px; display: grid; gap: 12px; }
+  details { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 4px 18px; }
+  summary { cursor: pointer; font-weight: 700; padding: 14px 0; list-style: none; }
+  summary::-webkit-details-marker { display: none; }
+  summary::after { content: "+"; float: right; color: var(--accent); font-weight: 700; }
+  details[open] summary::after { content: "–"; }
+  details > div { padding: 0 0 16px; color: var(--body); }
+  details ul { margin: 8px 0 0; padding-left: 20px; }
+  code { background: var(--surface-2); padding: 1px 6px; border-radius: 6px; font-size: .92em; }
+
+  .contact { margin-top: 24px; background: var(--accent-soft); border-radius: 16px; padding: 16px 20px; }
+  .contact strong { color: var(--accent); font-family: var(--serif); font-size: 1.1rem; display: block; margin-bottom: 4px; }
+
+  .legal { background: var(--surface); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .legal .doc { max-width: 760px; }
+  .legal h3 { font-size: 1.25rem; margin: 28px 0 8px; }
+  .legal p, .legal li { color: var(--body); }
+  .legal ul { padding-left: 22px; }
+  .legal .updated { color: var(--muted); font-size: .92rem; margin-top: 6px; }
+  .summary-box { margin-top: 22px; border-left: 4px solid var(--green); background: var(--surface-2); padding: 14px 18px; border-radius: 0 12px 12px 0; }
+
+  footer { padding: 36px 0 48px; color: var(--muted); font-size: .9rem; }
+  footer .wrap { display: flex; flex-wrap: wrap; gap: 12px 24px; justify-content: space-between; }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="#"><img src="icon.png" alt="">Bala Read</a>
+    <nav>
+      <a class="opt" href="#fonctions">Fonctions</a>
+      <a href="#assistance">Assistance</a>
+      <a href="#confidentialite">Confidentialité</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <div class="app"><img src="icon.png" alt="Icône de Bala Read"><span>iPhone et iPad</span></div>
+        <h1>Votre bibliothèque Calibre, dans votre poche.</h1>
+        <p class="tag">Bala Read se connecte à votre serveur Calibre-Web pour lire vos livres, BD et PDF, même hors ligne. Rien ne transite par nous.</p>
+        <div class="ctas">
+          <a class="btn" href="#assistance">Assistance</a>
+          <a class="btn ghost" href="#confidentialite">Confidentialité</a>
+        </div>
+      </div>
+      <div class="phones">
+        <img src="img/01-accueil.jpg" alt="Écran d'accueil : lectures en cours et ajouts récents">
+        <img src="img/04-lecteur.jpg" alt="Le lecteur en thème sépia">
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="fonctions">
+    <div class="wrap">
+      <span class="eyebrow">Fonctions</span>
+      <h2 class="section-title">Pensé pour la lecture longue</h2>
+      <p class="lead">Une app calme et rapide, qui respecte votre bibliothèque et vos habitudes.</p>
+      <div class="grid">
+        <div class="card"><div class="ico">📚</div><h3>Bibliothèque instantanée</h3><p>Votre catalogue s'affiche immédiatement, même sans réseau. Les nouveautés arrivent en arrière-plan. Tri par série, étiquettes et état de lecture.</p></div>
+        <div class="card"><div class="ico">⬇︎</div><h3>Lecture hors ligne</h3><p>Les livres que vous ouvrez sont gardés sur l'appareil. Les téléchargements continuent même app fermée, avec leur progression.</p></div>
+        <div class="card"><div class="ico">📖</div><h3>EPUB, PDF et BD</h3><p>Un lecteur moderne pour EPUB, PDF et BD au format CBZ : pages ou défilement, thèmes clair, sépia et sombre, police, marges, sens manga.</p></div>
+        <div class="card"><div class="ico">%</div><h3>Progression partout</h3><p>Pourcentage de lecture sur chaque couverture, reprise exacte de votre page, synchronisée entre vos appareils via votre iCloud.</p></div>
+        <div class="card"><div class="ico">🔖</div><h3>Marque-pages et sommaire</h3><p>Ajoutez des marque-pages, parcourez le sommaire ou les vignettes d'un PDF, sautez n'importe où avec le curseur.</p></div>
+        <div class="card"><div class="ico">🔒</div><h3>Votre serveur, vos données</h3><p>L'app ne parle qu'à votre serveur Calibre-Web. Aucun compte, aucune publicité, aucune statistique d'utilisation.</p></div>
+      </div>
+      <div class="shots" aria-label="Captures d'écran">
+        <img src="img/01-accueil.jpg" alt="Accueil">
+        <img src="img/02-bibliotheque.jpg" alt="Bibliothèque">
+        <img src="img/04-lecteur.jpg" alt="Lecteur EPUB">
+        <img src="img/05-bd.jpg" alt="Lecture d'une BD">
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="assistance">
+    <div class="wrap">
+      <span class="eyebrow">Assistance</span>
+      <h2 class="section-title">Besoin d'aide ?</h2>
+      <p class="lead">Bala Read fonctionne avec votre propre serveur <a href="https://github.com/janeczku/calibre-web">Calibre-Web</a> (logiciel libre, auto-hébergé), via son flux OPDS.</p>
+      <div class="faq">
+        <details open>
+          <summary>Comment connecter ma bibliothèque ?</summary>
+          <div>
+            <ul>
+              <li>Saisissez l'adresse de votre serveur Calibre-Web, par exemple <code>https://livres.mondomaine.fr</code> ou <code>http://192.168.1.20:8083</code>.</li>
+              <li>Utilisez votre identifiant et votre mot de passe Calibre-Web.</li>
+              <li>Le flux OPDS doit être activé (Calibre-Web › Administration › Configuration › « Activer le catalogue OPDS »).</li>
+            </ul>
+          </div>
+        </details>
+        <details>
+          <summary>Je n'ai pas de serveur, puis-je essayer l'app ?</summary>
+          <div>Oui : sur l'écran d'accueil, touchez « Essayer avec la bibliothèque de démo ». Quelques livres, une BD et un guide PDF créés pour l'app vous permettent de découvrir toutes les fonctions.</div>
+        </details>
+        <details>
+          <summary>Quels formats sont pris en charge ?</summary>
+          <div>EPUB, PDF et CBZ. Le format MOBI d'Amazon n'est pas lisible : convertissez ces livres en EPUB dans Calibre (« Convertir les livres »), ils apparaîtront ensuite dans l'app.</div>
+        </details>
+        <details>
+          <summary>La bibliothèque ne se met pas à jour</summary>
+          <div>Tirez la liste vers le bas pour forcer une synchronisation complète, ou utilisez Réglages › Synchroniser la bibliothèque. Les séries sont analysées en arrière-plan lorsque de nouveaux livres apparaissent.</div>
+        </details>
+        <details>
+          <summary>Ma progression ne se synchronise pas entre mes appareils</summary>
+          <div>La synchronisation passe par votre compte iCloud. Vérifiez que vous êtes connecté au même compte iCloud sur vos appareils et que iCloud Drive est activé.</div>
+        </details>
+        <details>
+          <summary>Comment libérer de l'espace ?</summary>
+          <div>Onglet Téléchargés : balayez un livre pour le supprimer de l'appareil, ou utilisez le menu ⋯ › « Tout supprimer de l'appareil ». Vos livres restent sur votre serveur et votre progression est conservée.</div>
+        </details>
+      </div>
+      <div class="contact">
+        <strong>Contacter le développeur</strong>
+        Ouvrez une demande sur <a href="https://github.com/julienL-IT/bala-read/issues">GitHub</a>, ou depuis l'App Store : page de l'app › « Assistance de l'app ».
+      </div>
+    </div>
+  </section>
+
+  <section class="block legal" id="confidentialite">
+    <div class="wrap doc">
+      <span class="eyebrow">Confidentialité</span>
+      <h2 class="section-title">Politique de confidentialité</h2>
+      <p class="updated">Dernière mise à jour : 13 novembre 2026</p>
+
+      <div class="summary-box">
+        <strong>En bref :</strong> Bala Read ne collecte aucune donnée personnelle. Le développeur n'a accès ni à votre bibliothèque, ni à vos identifiants, ni à vos lectures. L'app communique uniquement avec le serveur que vous indiquez et avec votre propre compte iCloud.
+      </div>
+
+      <h3>Données que vous saisissez</h3>
+      <p>L'adresse de votre serveur Calibre-Web, votre identifiant et votre mot de passe sont enregistrés uniquement sur votre appareil, dans le trousseau sécurisé d'iOS (Keychain). Ils servent exclusivement à se connecter à votre serveur.</p>
+
+      <h3>Données stockées sur l'appareil</h3>
+      <ul>
+        <li>Le catalogue de votre bibliothèque (titres, auteurs, séries, couvertures), pour un affichage instantané et hors ligne.</li>
+        <li>Les livres que vous téléchargez pour les lire hors ligne.</li>
+        <li>Vos réglages de lecture.</li>
+      </ul>
+      <p>Ces données restent sur votre appareil et sont supprimées avec l'app, ou via Réglages › « Se déconnecter de tout ».</p>
+
+      <h3>Synchronisation iCloud</h3>
+      <p>Votre progression de lecture, vos marque-pages, vos favoris et vos collections sont synchronisés entre vos appareils grâce au stockage iCloud d'Apple (iCloud Key-Value Storage), rattaché à votre compte iCloud. Le développeur n'y a pas accès. Cette synchronisation est soumise à la politique de confidentialité d'Apple.</p>
+
+      <h3>Communications réseau</h3>
+      <p>L'app se connecte uniquement au serveur Calibre-Web que vous avez configuré, pour récupérer le catalogue, les couvertures et les livres. Aucune autre connexion n'est établie vers des serveurs tiers.</p>
+
+      <h3>Ce que l'app ne fait pas</h3>
+      <ul>
+        <li>Aucun compte à créer, aucune publicité.</li>
+        <li>Aucun outil de statistiques, de suivi publicitaire ou de mesure d'audience.</li>
+        <li>Aucune donnée vendue ou partagée avec des tiers.</li>
+      </ul>
+
+      <h3>Enfants</h3>
+      <p>L'app ne collecte aucune donnée, y compris auprès des enfants.</p>
+
+      <h3>Vos droits</h3>
+      <p>Toutes les données étant stockées sur votre appareil, sur votre serveur ou dans votre iCloud, vous en gardez le contrôle total : supprimer l'app efface les données locales ; les données iCloud se gèrent dans les réglages iCloud de votre appareil.</p>
+
+      <h3>Contact</h3>
+      <p>Pour toute question sur cette politique : <a href="https://github.com/julienL-IT/bala-read/issues">GitHub</a> ou la page App Store de l'app › « Assistance de l'app ».</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Bala Read</span>
+    <span>Calibre et Calibre-Web sont des logiciels libres indépendants de cette app.</span>
+  </div>
+</footer>
+
+</body>
+</html>
